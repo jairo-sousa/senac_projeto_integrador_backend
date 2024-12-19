@@ -4,6 +4,7 @@ import {
     SchedulingCreateData,
     SchedulingFull,
     SchedulingRepository,
+    SchedulingService,
 } from "../interfaces/scheduling.interface";
 
 function getFirstName(fullName: string): string {
@@ -29,10 +30,13 @@ class SchedulingRepositoryPrisma implements SchedulingRepository {
         return result;
     }
 
-    async findById(id: number): Promise<Scheduling | null> {
+    async findById(id: number): Promise<SchedulingService | null> {
         const result = await prisma.scheduling.findUnique({
             where: {
                 id,
+            },
+            include: {
+                services: true,
             },
         });
 

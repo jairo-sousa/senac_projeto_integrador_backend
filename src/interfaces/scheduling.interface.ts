@@ -1,4 +1,16 @@
-import { Client } from "./client.interface";
+export interface SchedulingService {
+    services: {
+        id: number;
+        name: string;
+        description: string;
+        duration: number;
+        price: number;
+    }[];
+    id: number;
+    date: Date;
+    status: string;
+    clientId: number;
+}
 
 export interface SchedulingBase {
     date: Date;
@@ -28,7 +40,7 @@ export interface SchedulingFull {
 
 export interface SchedulingRepository {
     create(data: SchedulingCreateData): Promise<Scheduling>;
-    findById(id: number): Promise<Scheduling | null>;
+    findById(id: number): Promise<SchedulingService | null>;
     findAllSchedulings(date: Date): Promise<SchedulingFull[]>;
     updateScheduling(data: Scheduling): Promise<Scheduling>;
     deleteScheduling(id: number): Promise<Boolean>;
